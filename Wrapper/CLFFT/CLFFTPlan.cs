@@ -1,4 +1,9 @@
 using System;
+using cl_mem = System.IntPtr;
+using cl_event = System.IntPtr;
+using cl_command_queue = System.IntPtr;
+using cl_context = System.IntPtr;
+
 
 namespace CLMathLibraries.CLFFT
 {
@@ -218,11 +223,14 @@ namespace CLMathLibraries.CLFFT
         #endregion
 
         #region Constructors
-        
-        public CLFFTPlan(IntPtr contextHandle, CLFFTSettings settings)
-        {
-            Init(contextHandle, settings.Dimension, settings.Size);
 
+        public CLFFTPlan(cl_context contextHandle, CLFFTDim dimension, ulong[] size)
+        {
+            CLFFT.CheckStatus(CLFFT.CreateDefaultPlan(out Handle, contextHandle, dimension, size));
+        }
+
+        public CLFFTPlan(cl_context contextHandle, CLFFTSettings settings) : this(contextHandle, settings.Dimension, settings.Size)
+        {
             if (settings.ResultLocation != CLFFTResultLocation.CLFFT_INPLACE) ResultLocation = settings.ResultLocation;
 
             if (settings.Layout.Item1 != CLFFTLayout.CLFFT_COMPLEX_INTERLEAVED || settings.Layout.Item1 != CLFFTLayout.CLFFT_COMPLEX_INTERLEAVED) Layout = settings.Layout;
@@ -240,9 +248,14 @@ namespace CLMathLibraries.CLFFT
             ScaleBackward = settings.ScaleBackward;
         }
 
+        public CLFFTPlan(cl_context newContextHandle, CLFFTPlan other)
+        {
+            CLFFT.CopyPlan(out Handle, newContextHandle, other.Handle);
+        }
+
         #endregion
 
-        #region Initialization
+        #region Baking
 
         public void Bake(IntPtr[] queueHandles)
         {
@@ -252,10 +265,9 @@ namespace CLMathLibraries.CLFFT
             IsBaked = true;
         }
 
-        private void Init(IntPtr contextHandle, CLFFTDim dim, ulong[] size)
-        {
-            CLFFT.CheckStatus(CLFFT.CreateDefaultPlan(out Handle, contextHandle, dim, size));
-        }
+        #endregion
+
+        #region Teardown
 
         public void Destroy()
         {
@@ -265,9 +277,22 @@ namespace CLMathLibraries.CLFFT
         #endregion
 
         #region Execution
-		
-        
 
+        public void EnqueueTransform(
+            CLFFTDirection dir,
+            UInt32 numQueuesAndEvents,
+            cl_command_queue[] commQueues,
+            UInt32 numWaitEvents,
+            cl_event[] waitEvents,
+            cl_event[] outEvents,
+            cl_mem[] inputBuffers,
+            cl_mem[] outputBuffers,
+            cl_mem tmpBuffer
+            )
+        {
+            CLFFT.CheckStatus(CLFFT.EnqueueTransform(Handle, dir, numQueuesAndEvents, commQueues, numWaitEvents, waitEvents, outEvents, inputBuffers, outputBuffers, tmpBuffer));
+            IsBaked = true;
+        }
         #endregion
     }
 }
