@@ -257,6 +257,21 @@ namespace CLMathLibraries.CLSparse
             CLSparseControl control);
 
         /*!
+         * \brief Convert a single precision CSR encoded sparse matrix into a dense matrix
+         * \param[in] csr  Input CSR encoded sparse matrix
+         * \param[out] A  Output dense matrix
+         * \param[in] control A valid clsparseControl created with clsparseCreateControl
+         * \pre The sparse matrix data must first be sorted by rows, then by columns
+         *
+         * \ingroup CONVERT
+         */
+        [DllImport(PathToDll, CharSet = CharSet.Ansi, EntryPoint = "clsparseScsr2dense")]
+        public static extern CLSparseStatus Scsr2dense(
+            ref CLSparseCsrMatrix csr,
+            ref CLDenseMatrix A,
+            CLSparseControl control);
+
+        /*!
          * \brief Convert a double precision dense matrix into a CSR encoded sparse matrix
          * \param[in] A  Input dense matrix
          * \param[out] csr  Output CSR encoded sparse matrix
@@ -268,7 +283,7 @@ namespace CLMathLibraries.CLSparse
         [DllImport(PathToDll, CharSet = CharSet.Ansi, EntryPoint = "clsparseSdense2csr")]
         public static extern CLSparseStatus Sdense2csr(
             ref CLDenseMatrix A,
-            out CLSparseCsrMatrix csr,
+            ref CLSparseCsrMatrix csr,
             CLSparseControl control);
 
         #endregion
