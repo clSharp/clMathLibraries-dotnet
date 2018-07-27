@@ -1,93 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CFFBB270-C58A-4152-9B84-ACC1A32B7D25}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CLMathLibraries</RootNamespace>
-    <AssemblyName>clMathLibraries-dotnet</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
-    <TargetFrameworkProfile />
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <Description>.NET wrapper for clMathLibraries</Description>
+    <Company>Till I.D. GmbH</Company>
+    <Copyright>Copyright ©  2017 Till I.D. GmbH</Copyright>
+    <AssemblyVersion>0.1.0.0</AssemblyVersion>
+    <FileVersion>0.1.0.0</FileVersion>
+    <Version>0.1.0</Version>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="CLBLAS\CLBLAS.cs" />
-    <Compile Include="CLBLAS\CLBLASDiag.cs" />
-    <Compile Include="CLBLAS\CLBLASOrder.cs" />
-    <Compile Include="CLBLAS\CLBLASSide.cs" />
-    <Compile Include="CLBLAS\CLBLASStatus.cs" />
-    <Compile Include="CLBLAS\CLBLASTranspose.cs" />
-    <Compile Include="CLBLAS\CLBLASUpLo.cs" />
-    <Compile Include="CLBLAS\DoubleComplex.cs" />
-    <Compile Include="CLBLAS\FloatComplex.cs" />
-    <Compile Include="CLFFT\CLFFT.cs" />
-    <Compile Include="CLFFT\CLFFTCallback.cs" />
-    <Compile Include="CLFFT\CLFFTDim.cs" />
-    <Compile Include="CLFFT\CLFFTDirection.cs" />
-    <Compile Include="CLFFT\CLFFTLayout.cs" />
-    <Compile Include="CLFFT\CLFFTPlan.cs" />
-    <Compile Include="CLFFT\CLFFTPlanHandle.cs" />
-    <Compile Include="CLFFT\CLFFTPrecision.cs" />
-    <Compile Include="CLFFT\CLFFTResultLocation.cs" />
-    <Compile Include="CLFFT\CLFFTResultTransposed.cs" />
-    <Compile Include="CLFFT\CLFFTSettings.cs" />
-    <Compile Include="CLFFT\CLFFTSetupData.cs" />
-    <Compile Include="CLFFT\CLFFTStatus.cs" />
-    <Compile Include="CLSparse\CLDenseMajor.cs" />
-    <Compile Include="CLSparse\CLDenseMatrix.cs" />
-    <Compile Include="CLSparse\CLDenseVector.cs" />
-    <Compile Include="CLSparse\CLPreconditioner.cs" />
-    <Compile Include="CLSparse\CLSparse.cs" />
-    <Compile Include="CLSparse\ClSparseControl.cs" />
-    <Compile Include="CLSparse\CLSparseCooMatrix.cs" />
-    <Compile Include="CLSparse\CLSparseCreateResult.cs" />
-    <Compile Include="CLSparse\CLSparseCreateSolverResult.cs" />
-    <Compile Include="CLSparse\CLSparseCsrMatrix.cs" />
-    <Compile Include="CLSparse\CLSparseScalar.cs" />
-    <Compile Include="CLSparse\CLSparseSolverControl.cs" />
-    <Compile Include="CLSparse\CLSparseStatus.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
-  <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
-  </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
