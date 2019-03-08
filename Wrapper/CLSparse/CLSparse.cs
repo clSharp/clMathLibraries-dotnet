@@ -6,7 +6,7 @@ namespace CLMathLibraries.CLSparse
 {
     public static class CLSparse
     {
-        private const string PathToDll = "clSparse.dll";
+        private const string PathToDll = "clSparse";
 
         #region Init
 
