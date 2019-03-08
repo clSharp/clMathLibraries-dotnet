@@ -28,11 +28,14 @@ namespace CLMathLibraries.CLSparse
         public clsparseIdx_t Off_values;
         public clsparseIdx_t Off_col_indices;
         public clsparseIdx_t Off_row_pointer;
+
         /**@}*/
 
         /*! Pointer to a private structure that contains meta-information the library keeps on a 
         csr-encoded sparse matrix
         */
+#pragma warning disable CS0169
         private IntPtr _meta;
+#pragma warning restore CS0169
     }
 }

@@ -11,7 +11,7 @@ namespace CLMathLibraries.CLBLAS
 {
     public static class CLBLAS
     {
-        private const string PathToDll = "clBLAS.dll";
+        private const string PathToDll = "clBLAS";
         
         #region Init
 

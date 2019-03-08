@@ -9,7 +9,7 @@ namespace CLMathLibraries.CLFFT
 {
     public static class CLFFT
     {
-        private const string PathToDll = "clFFT.dll";
+        private const string PathToDll = "clFFT";
 
         [DllImport(PathToDll, CharSet = CharSet.Ansi, EntryPoint = "clfftSetup")]
         public static extern CLFFTStatus Setup(CLFFTSetupData setupData);
