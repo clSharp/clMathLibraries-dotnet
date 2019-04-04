@@ -1,0 +1,23 @@
+language: csharp
+mono: none
+group: dev
+sudo: required
+dist: xenial
+dotnet: 2.2
+
+jobs:
+  include:
+    - stage: build
+      script: 
+        - dotnet build Wrapper\cLMathLibraries-dotnet.csproj
+    - stage: deploy
+      if: branch = master AND tag IS present
+      script:
+        - dotnet pack Wrapper\cLMathLibraries-dotnet.csproj --configuration Release
+      deploy:
+        - provider: script
+          skip_cleanup: true
+          script: dotnet nuget push Wrapper\bin\Release\cLMathLibraries-dotnet.*.nupkg --api-key $NUGET_API_KEY --source https://api.nuget.org/v3/index.json
+        - provider: releases
+          api_key: $GITHUB_TOKEN
+          skip_cleanup: false
